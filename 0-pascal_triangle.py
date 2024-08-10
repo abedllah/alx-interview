@@ -1,21 +1,29 @@
 #!/usr/bin/python3
-"""Writing a function for Pascal's Triangle"""
+""" module for pascal_triangle function """
 
 
 def pascal_triangle(n):
+    """ function that returns a list of lists of integers
+        representing the Pascal’s triangle of n
     """
-    returns a lists of integers
-    representing the Pascal’s triangle
-    """
-    if n <= 0:
-        return []
+    triangle = []
 
-    triangle = [[1]]
-    while len(triangle) != n:
-        previous = triangle[-1]
-        current = [1]
-        for i in range(len(previous) - 1):
-            current.append(previous[i] + previous[i + 1])
-        current.append(1)
-        triangle.append(current)
+    if (n > 0):
+        # add the first row
+        triangle.append([1])
+
+        for i in range(1, n):
+            row = []
+
+            # add the first "1"
+            row.append(1)
+
+            for j in range(1, i):
+                row.append(triangle[i-1][j-1] + triangle[i-1][j])
+
+            # add the last "1"
+            row.append(1)
+
+            triangle.append(row)
+
     return triangle
