@@ -1,4 +1,13 @@
-ef canUnlockAll(boxes):
+#!/usr/bin/python3
+'''LockBoxes Challenge'''
+
+
+def canUnlockAll(boxes):
+    '''determines if all the boxes can be opened or not
+    Returns:
+        True: all boxes can be opened
+        False: not all boxes can be opened
+    '''
     n = len(boxes)
     unlocked = [False] * n
     unlocked[0] = True
