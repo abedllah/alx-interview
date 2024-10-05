@@ -1,20 +1,21 @@
 #!/usr/bin/python3
 """Making Change Problem"""
 
-
-def make_change(coins, total):
-    """Determines the fewest number of coins needed \
-        to meet a given amount total"""
-    if total <= 0:
+def makeChange(coins, total):
+    if total == 0:
         return 0
+    if total < 0:
+        return
 
-    current_total = 0
-    used_coins = 0
-    coins = sorted(coins, reverse=True)
-    for coin in coins:
-        r = (total - current_total) // coin
-        current_total += r * coin
-        used_coins += r
-        if current_total == total:
-            return used_coins
-    return -1
+
+    dp = [float('inf')] * (total + 1)
+    
+
+    dp[0] = 0
+
+    for amount in range(1, total + 1):
+        for coin in coins:
+            if amount - coin >= 0:
+                dp[amount] = min(dp[amount], dp[amount - coin] + 1)
+    
+    return dp[total] if dp[total] != float('inf') else -1
